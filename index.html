@@ -4,80 +4,603 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>小阳工具箱 - 高效实用的工具集合</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Microsoft Yahei", sans-serif;
+        /* ========== CSS 变量：可爱粉色系 ========== */
+        :root {
+            --pink-1: #FFE4EC;
+            --pink-2: #FFC0D4;
+            --pink-3: #FF8FB1;
+            --pink-4: #FF6B9D;
+            --pink-5: #E91E63;
+            --pink-deep: #C2185B;
+            --cream: #FFF8F3;
+            --bg-1: #FFF0F5;
+            --bg-2: #FFE4EC;
+            --text: #5D4037;
+            --text-dim: #A1887F;
+            --text-bright: #FFFFFF;
+            --shadow: 0 20px 50px rgba(233, 30, 99, 0.18);
+            --radius: 28px;
+            --radius-sm: 14px;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #FFE4EC 0%, #FFD0E0 50%, #FFE0EE 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            color: var(--text);
+            overflow-x: hidden;
+            padding: 20px;
+            position: relative;
         }
+
+        /* ========== 浮动装饰元素（减少数量保证性能）========== */
+        .deco {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+            overflow: hidden;
+        }
+        .deco span {
+            position: absolute;
+            font-size: 28px;
+            opacity: 0.5;
+            animation: floatSlow 8s ease-in-out infinite;
+        }
+        .deco span:nth-child(1) { top: 10%; left: 8%;  animation-delay: 0s;   font-size: 32px; }
+        .deco span:nth-child(2) { top: 70%; left: 5%;  animation-delay: -2s;  font-size: 24px; }
+        .deco span:nth-child(3) { top: 20%; right: 8%; animation-delay: -4s;  font-size: 28px; }
+        .deco span:nth-child(4) { top: 80%; right: 5%; animation-delay: -6s;  font-size: 30px; }
+        .deco span:nth-child(5) { top: 45%; left: 50%; animation-delay: -3s;  font-size: 22px; }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50%      { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        /* ========== 顶部光晕 ========== */
+        .halo {
+            position: fixed;
+            top: -100px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(ellipse, rgba(255, 192, 212, 0.5), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ========== 主卡片：圆胖可爱风 ========== */
         .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 50px 40px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            position: relative;
+            z-index: 1;
+            background: #FFFFFF;
+            border: 3px solid var(--pink-2);
+            border-radius: var(--radius);
+            padding: 44px 40px 36px;
+            box-shadow: var(--shadow), 0 0 0 8px rgba(255, 192, 212, 0.2);
             text-align: center;
-            max-width: 650px;
-            width: 92%;
+            max-width: 720px;
+            width: 100%;
+            animation: bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+        @keyframes bounceIn {
+            0%   { opacity: 0; transform: scale(0.5); }
+            60%  { opacity: 1; transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* ========== Logo：圆胖 + 漂浮 ========== */
+        .logo {
+            width: 88px; height: 88px;
+            margin: 0 auto 18px;
+            background: linear-gradient(135deg, var(--pink-3), var(--pink-5));
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 44px;
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
+            animation: floatLogo 3s ease-in-out infinite;
+            position: relative;
+        }
+        .logo::before, .logo::after {
+            content: '';
+            position: absolute;
+            width: 14px; height: 14px;
+            background: var(--pink-2);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+        .logo::before { top: -6px; right: -6px; }
+        .logo::after  { bottom: -6px; left: -6px; }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50%      { transform: translateY(-10px) rotate(3deg); }
+        }
+
+        /* ========== 标题 ========== */
         h1 {
-            font-size: 42px;
-            margin-bottom: 24px;
-            font-weight: 700;
+            font-size: 38px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--pink-deep), var(--pink-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
             letter-spacing: 1px;
         }
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-dim);
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 22px;
+        }
+
+        /* ========== 装饰分隔 ========== */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            color: var(--pink-3);
+            font-size: 14px;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            max-width: 80px;
+            background: linear-gradient(90deg, transparent, var(--pink-2), transparent);
+        }
+
+        /* ========== 作者信息 ========== */
         .author-info {
-            margin: 28px 0;
-            font-size: 19px;
-            line-height: 2;
-            opacity: 0.95;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 26px;
+            flex-wrap: wrap;
         }
-        .download-btn {
-            display: inline-block;
-            margin-top: 35px;
-            padding: 16px 50px;
-            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 20px;
-            font-weight: 600;
+        .info-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--pink-1);
+            color: var(--pink-deep);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .info-pill .icon { font-size: 14px; }
+
+        .desc {
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ========== 功能卡片 ========== */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, #FFFFFF, var(--pink-1));
+            border: 1.5px solid var(--pink-2);
+            border-radius: var(--radius-sm);
+            padding: 16px 8px 14px;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
-            border: none;
+            cursor: default;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px) rotate(-1deg);
+            border-color: var(--pink-3);
+            box-shadow: 0 8px 20px rgba(255, 143, 177, 0.25);
+        }
+        .feature-card .icon { font-size: 26px; margin-bottom: 6px; }
+        .feature-card .name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--pink-deep);
+        }
+
+        /* ========== 版本说明 ========== */
+        .version-hint {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .version-hint strong {
+            color: var(--pink-deep);
+            font-weight: 600;
+            background: var(--pink-1);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* ========== 双按钮：圆胖可爱 ========== */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: inherit;
+            text-decoration: none;
             cursor: pointer;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            color: #fff;
+            min-width: 180px;
         }
-        .download-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 28px rgba(0, 114, 255, 0.6);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pink-3), var(--pink-5));
+            box-shadow: 0 6px 18px rgba(233, 30, 99, 0.3);
         }
-        .download-btn:active {
-            transform: translateY(-1px);
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 28px rgba(233, 30, 99, 0.45);
+        }
+        .btn-primary:active { transform: translateY(0) scale(0.98); }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: var(--pink-deep);
+            border: 2px solid var(--pink-3);
+        }
+        .btn-secondary:hover {
+            background: var(--pink-1);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(255, 143, 177, 0.3);
+        }
+        .btn-secondary:active { transform: translateY(0) scale(0.98); }
+
+        .btn .badge {
+            font-size: 10px;
+            background: #FFEB3B;
+            color: var(--pink-deep);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-left: 2px;
+            animation: badgeWiggle 1.5s ease-in-out infinite;
+        }
+        @keyframes badgeWiggle {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50%      { transform: rotate(5deg) scale(1.1); }
+        }
+
+        /* ========== 进度条 ========== */
+        .progress-container {
+            margin-top: 16px;
+            display: none;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--pink-1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--pink-3), var(--pink-5));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        .progress-text {
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--pink-deep);
+        }
+
+        /* ========== 底部 ========== */
+        .footer {
+            margin-top: 24px;
+            font-size: 11px;
+            color: var(--pink-3);
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        /* ========== 自定义弹窗（替换浏览器 confirm）========== */
+        .modal-mask {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-mask.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal {
+            background: #FFFFFF;
+            border: 3px solid var(--pink-2);
+            border-radius: 24px;
+            padding: 32px 36px 24px;
+            text-align: center;
+            max-width: 380px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.7);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-mask.show .modal { transform: scale(1); }
+
+        .modal .modal-icon {
+            font-size: 56px;
+            margin-bottom: 12px;
+            display: inline-block;
+            animation: bounceIcon 1s ease-in-out infinite;
+        }
+        @keyframes bounceIcon {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50%      { transform: translateY(-8px) rotate(5deg); }
+        }
+        .modal .modal-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--pink-deep);
+            margin-bottom: 10px;
+        }
+        .modal .modal-msg {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+        .modal-btns {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .modal-btn {
+            flex: 1;
+            padding: 11px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .modal-btn-confirm {
+            background: linear-gradient(135deg, var(--pink-3), var(--pink-5));
+            color: #fff;
+            border-color: transparent;
+        }
+        .modal-btn-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(233, 30, 99, 0.35);
+        }
+        .modal-btn-cancel {
+            background: #FFF;
+            color: var(--text-dim);
+            border-color: var(--pink-2);
+        }
+        .modal-btn-cancel:hover {
+            background: var(--pink-1);
+            color: var(--pink-deep);
+            border-color: var(--pink-3);
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 600px) {
+            .container { padding: 30px 18px 24px; }
+            h1 { font-size: 26px; }
+            .features { grid-template-columns: repeat(2, 1fr); }
+            .btn { padding: 12px 18px; font-size: 13px; width: 100%; }
+            .btn-group { flex-direction: column; }
+            .author-info { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🧰 小阳工具箱</h1>
-        <div class="author-info">
-            <p>作者：小阳</p>
-            <p>联系QQ：2248653591</p>
-            <p>一款高效、实用的多功能工具集合，为你的日常操作提供便捷支持。</p>
-        </div>
-        <!-- jsDelivr 国内加速下载链接，无需VPN -->
-        <a href="https://cdn.jsdelivr.net/gh/xiaoyang910477/-@main/小阳工具箱.exe" 
-           class="download-btn" target="_blank" download="小阳工具箱.exe">
-            📥 立即下载
-        </a>
+
+    <!-- 浮动装饰 -->
+    <div class="deco">
+        <span>🌸</span>
+        <span>🎀</span>
+        <span>💖</span>
+        <span>✨</span>
+        <span>🌷</span>
     </div>
+    <div class="halo"></div>
+
+    <!-- ========== 主内容 ========== -->
+    <div class="container">
+        <div class="logo">🧰</div>
+
+        <h1>小阳工具箱</h1>
+        <div class="subtitle">XIAOYANG TOOLBOX</div>
+
+        <div class="divider">✿ 高效 · 实用 · 便捷 ✿</div>
+
+        <!-- 作者信息 -->
+        <div class="author-info">
+            <span class="info-pill"><span class="icon">✍️</span>作者：小阳</span>
+            <span class="info-pill"><span class="icon">💬</span>QQ：2248653591</span>
+            <span class="info-pill"><span class="icon">📦</span>v1.0.2</span>
+        </div>
+
+        <p class="desc">
+            一款高效、实用的多功能工具集合，为你的日常操作提供便捷支持。<br>
+            请根据需求选择下载版本～
+        </p>
+
+        <!-- 功能卡片 -->
+        <div class="features">
+            <div class="feature-card"><div class="icon">🚗</div><div class="name">驱动安装</div></div>
+            <div class="feature-card"><div class="icon">📱</div><div class="name">ADB 工具</div></div>
+            <div class="feature-card"><div class="icon">⚡</div><div class="name">Fastboot</div></div>
+            <div class="feature-card"><div class="icon">🛠️</div><div class="name">系统工具</div></div>
+            <div class="feature-card"><div class="icon">🔍</div><div class="name">设备检测</div></div>
+            <div class="feature-card"><div class="icon">🎀</div><div class="name">粉色主题</div></div>
+        </div>
+
+        <!-- 版本提示 -->
+        <div class="version-hint">
+            <strong>便捷版</strong> 单文件即下即用
+            <strong>安装版</strong> 稳定长期使用
+        </div>
+
+        <!-- 双按钮 -->
+        <div class="btn-group">
+            <!-- 便捷版 -->
+            <a href="https://gitee.com/xiaoyang910477/shuaji/releases/download/v1.0.2/%E5%B0%8F%E9%98%B3%E5%B7%A5%E5%85%B7%E7%AE%B1%EF%BC%88%E4%BE%BF%E6%8D%B7%E7%89%88%EF%BC%89.exe"
+               class="btn btn-primary" target="_blank"
+               onclick="return startDownload(this, '便捷版')">
+                📥 便捷版小阳工具箱
+            </a>
+            <!-- 安装版 -->
+            <a href="https://gitee.com/xiaoyang910477/shuaji/releases/download/v1.0.2/%E5%B0%8F%E9%98%B3%E5%B7%A5%E5%85%B7%E7%AE%B1%EF%BC%88%E5%AE%89%E8%A3%85%E7%89%88%EF%BC%89.exe"
+               class="btn btn-secondary" target="_blank"
+               onclick="return startDownload(this, '安装版')">
+                📦 安装版小阳工具箱
+                <span class="badge">推荐</span>
+            </a>
+        </div>
+
+        <!-- 进度条 -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">🔄 准备开始下载...</div>
+        </div>
+
+        <div class="footer">— ♡ Made with love ♡ —</div>
+    </div>
+
+    <!-- ========== 自定义弹窗 ========== -->
+    <div class="modal-mask" id="modalMask">
+        <div class="modal">
+            <div class="modal-icon" id="modalIcon">🎉</div>
+            <div class="modal-title" id="modalTitle">下载已开始</div>
+            <div class="modal-msg" id="modalMsg">请查看浏览器下载栏完成下载</div>
+            <div class="modal-btns">
+                <button class="modal-btn modal-btn-cancel" id="modalCancel">取消</button>
+                <button class="modal-btn modal-btn-confirm" id="modalConfirm">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== 自定义弹窗逻辑（替换 confirm）==========
+        const modal = {
+            mask: document.getElementById('modalMask'),
+            icon: document.getElementById('modalIcon'),
+            title: document.getElementById('modalTitle'),
+            msg: document.getElementById('modalMsg'),
+            confirmBtn: document.getElementById('modalConfirm'),
+            cancelBtn: document.getElementById('modalCancel'),
+            onConfirm: null,
+
+            show(title, msg, icon, onConfirm) {
+                this.title.textContent = title;
+                this.msg.innerHTML = msg;
+                this.icon.textContent = icon || '🎉';
+                this.onConfirm = onConfirm;
+                this.mask.classList.add('show');
+            },
+            hide() {
+                this.mask.classList.remove('show');
+            }
+        };
+        modal.confirmBtn.addEventListener('click', () => {
+            const cb = modal.onConfirm;
+            modal.hide();
+            if (cb) cb(true);
+        });
+        modal.cancelBtn.addEventListener('click', () => modal.hide());
+        modal.mask.addEventListener('click', (e) => {
+            if (e.target === modal.mask) modal.hide();
+        });
+
+        // ========== 下载处理 ==========
+        function startDownload(btn, version) {
+            modal.show(
+                `📥 ${version}小阳工具箱`,
+                `点击「确定」开始下载<br>请查看浏览器下载栏`,
+                '🎀',
+                () => doDownload(btn, version)
+            );
+            return false;  // 阻止默认跳转，等用户点确定
+        }
+
+        function doDownload(btn, version) {
+            // 显示进度条
+            const container = document.getElementById('progressContainer');
+            const fill = document.getElementById('progressFill');
+            const text = document.getElementById('progressText');
+            container.style.display = 'block';
+
+            // 真正开始下载
+            window.open(btn.href, '_blank');
+
+            // 模拟进度
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 5;
+                if (progress > 100) progress = 100;
+                fill.style.width = progress + '%';
+                text.textContent = `📥 ${version} 下载进度：${progress}%`;
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    text.textContent = `✅ ${version} 下载完成！请在浏览器下载栏查看`;
+                    setTimeout(() => {
+                        container.style.display = 'none';
+                        fill.style.width = '0%';
+                    }, 4000);
+                }
+            }, 150);
+        }
+    </script>
 </body>
 </html>
