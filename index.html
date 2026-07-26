@@ -1,598 +1,1187 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小阳工具箱 - 高效实用的工具集合</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <style>
-        /* ========== CSS 变量：可爱粉色系 ========== */
-        :root {
-            --pink-1: #FFE4EC;
-            --pink-2: #FFC0D4;
-            --pink-3: #FF8FB1;
-            --pink-4: #FF6B9D;
-            --pink-5: #E91E63;
-            --pink-deep: #C2185B;
-            --cream: #FFF8F3;
-            --bg-1: #FFF0F5;
-            --bg-2: #FFE4EC;
-            --text: #5D4037;
-            --text-dim: #A1887F;
-            --text-bright: #FFFFFF;
-            --shadow: 0 20px 50px rgba(233, 30, 99, 0.18);
-            --radius: 28px;
-            --radius-sm: 14px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小阳宝宝 · 作品</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #F5F3F0;
+  color: #2C2C2A;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
 
-        body {
-            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #FFE4EC 0%, #FFD0E0 50%, #FFE0EE 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text);
-            overflow-x: hidden;
-            padding: 20px;
-            position: relative;
-        }
+/* ===== Navigation ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 24px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: rgba(245, 243, 240, 0.85);
+  backdrop-filter: blur(12px);
+}
+.nav-brand {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #2C2C2A;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #888780;
+  font-weight: 400;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: #2C2C2A; }
 
-        /* ========== 浮动装饰元素（减少数量保证性能）========== */
-        .deco {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none; z-index: 0;
-            overflow: hidden;
-        }
-        .deco span {
-            position: absolute;
-            font-size: 28px;
-            opacity: 0.5;
-            animation: floatSlow 8s ease-in-out infinite;
-        }
-        .deco span:nth-child(1) { top: 10%; left: 8%;  animation-delay: 0s;   font-size: 32px; }
-        .deco span:nth-child(2) { top: 70%; left: 5%;  animation-delay: -2s;  font-size: 24px; }
-        .deco span:nth-child(3) { top: 20%; right: 8%; animation-delay: -4s;  font-size: 28px; }
-        .deco span:nth-child(4) { top: 80%; right: 5%; animation-delay: -6s;  font-size: 30px; }
-        .deco span:nth-child(5) { top: 45%; left: 50%; animation-delay: -3s;  font-size: 22px; }
+/* ===== Hero Section ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 48px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero-label {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #B4B2A9;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+.hero-title {
+  font-size: clamp(48px, 8vw, 88px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  color: #2C2C2A;
+  max-width: 900px;
+}
+.hero-title em {
+  font-style: normal;
+  font-weight: 500;
+}
+.hero-sub {
+  font-size: 16px;
+  color: #888780;
+  line-height: 1.7;
+  max-width: 520px;
+  margin-top: 28px;
+  font-weight: 300;
+}
+.hero-cta {
+  margin-top: 40px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
 
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50%      { transform: translateY(-30px) rotate(15deg); }
-        }
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  letter-spacing: 1px;
+  border: none;
+}
+.btn-primary {
+  background: #2C2C2A;
+  color: #F5F3F0;
+}
+.btn-primary:hover {
+  background: #444441;
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent;
+  color: #2C2C2A;
+  border: 1px solid #D3D1C7;
+}
+.btn-ghost:hover {
+  border-color: #2C2C2A;
+  background: rgba(44, 44, 42, 0.04);
+  transform: translateY(-2px);
+}
 
-        /* ========== 顶部光晕 ========== */
-        .halo {
-            position: fixed;
-            top: -100px; left: 50%;
-            transform: translateX(-50%);
-            width: 600px; height: 400px;
-            background: radial-gradient(ellipse, rgba(255, 192, 212, 0.5), transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
+/* ===== Section ===== */
+.section {
+  padding: 100px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-header {
+  margin-bottom: 60px;
+}
+.section-number {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #B4B2A9;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: #2C2C2A;
+}
+.section-title em {
+  font-style: normal;
+  font-weight: 500;
+}
 
-        /* ========== 主卡片：圆胖可爱风 ========== */
-        .container {
-            position: relative;
-            z-index: 1;
-            background: #FFFFFF;
-            border: 3px solid var(--pink-2);
-            border-radius: var(--radius);
-            padding: 44px 40px 36px;
-            box-shadow: var(--shadow), 0 0 0 8px rgba(255, 192, 212, 0.2);
-            text-align: center;
-            max-width: 720px;
-            width: 100%;
-            animation: bounceIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes bounceIn {
-            0%   { opacity: 0; transform: scale(0.5); }
-            60%  { opacity: 1; transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+/* ===== Product Layout ===== */
+.product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.product:last-child { margin-bottom: 0; }
+.product-visual {
+  position: relative;
+}
+.product-mock {
+  background: #EDEBE6;
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.product-mock::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(44,44,42,0.03), transparent 70%);
+}
+.mock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #2C2C2A;
+  color: #F5F3F0;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.mock-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #2C2C2A;
+  margin-bottom: 6px;
+}
+.mock-desc {
+  font-size: 13px;
+  color: #888780;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.mock-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.mock-feat {
+  background: #fff;
+  border: 0.5px solid #D3D1C7;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #5F5E5A;
+  transition: all 0.3s;
+}
+.mock-feat:hover {
+  border-color: #2C2C2A;
+  background: #2C2C2A;
+  color: #fff;
+}
 
-        /* ========== Logo：圆胖 + 漂浮 ========== */
-        .logo {
-            width: 88px; height: 88px;
-            margin: 0 auto 18px;
-            background: linear-gradient(135deg, var(--pink-3), var(--pink-5));
-            border-radius: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 44px;
-            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
-            animation: floatLogo 3s ease-in-out infinite;
-            position: relative;
-        }
-        .logo::before, .logo::after {
-            content: '';
-            position: absolute;
-            width: 14px; height: 14px;
-            background: var(--pink-2);
-            border-radius: 50%;
-            opacity: 0.4;
-        }
-        .logo::before { top: -6px; right: -6px; }
-        .logo::after  { bottom: -6px; left: -6px; }
+.product-info {
+  padding-right: 20px;
+}
+.product-tag {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #B4B2A9;
+  margin-bottom: 16px;
+}
+.product-name {
+  font-size: 28px;
+  font-weight: 500;
+  color: #2C2C2A;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.product-desc {
+  font-size: 14px;
+  color: #888780;
+  line-height: 1.9;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+.product-desc strong {
+  font-weight: 500;
+  color: #5F5E5A;
+}
+.product-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  letter-spacing: 1px;
+  border: none;
+  background: #2C2C2A;
+  color: #F5F3F0;
+}
+.btn-download:hover {
+  background: #444441;
+  transform: translateY(-2px);
+}
+.btn-learn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: inherit;
+  text-decoration: none;
+  transition: all 0.4s;
+  cursor: pointer;
+  border: 1px solid #D3D1C7;
+  background: transparent;
+  color: #2C2C2A;
+}
+.btn-learn:hover {
+  border-color: #2C2C2A;
+  background: rgba(44,44,42,0.04);
+  transform: translateY(-2px);
+}
 
-        @keyframes floatLogo {
-            0%, 100% { transform: translateY(0) rotate(-3deg); }
-            50%      { transform: translateY(-10px) rotate(3deg); }
-        }
+/* ===== Feature List (mock) ===== */
+.mock-downloader {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.mock-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 0.5px solid #EDEBE6;
+}
+.mock-item:last-child { border-bottom: none; }
+.mock-file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mock-icon {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: #EDEBE6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #5F5E5A;
+}
+.mock-fname {
+  font-size: 12px;
+  font-weight: 500;
+  color: #2C2C2A;
+}
+.mock-fsize {
+  font-size: 11px;
+  color: #B4B2A9;
+}
+.mock-progress {
+  width: 100px;
+  height: 4px;
+  background: #EDEBE6;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.mock-fill {
+  height: 100%;
+  background: #2C2C2A;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+.mock-speed {
+  font-size: 11px;
+  color: #888780;
+  font-weight: 500;
+}
 
-        /* ========== 标题 ========== */
-        h1 {
-            font-size: 38px;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--pink-deep), var(--pink-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 4px;
-            letter-spacing: 1px;
-        }
-        .subtitle {
-            font-size: 13px;
-            color: var(--text-dim);
-            font-weight: 400;
-            letter-spacing: 4px;
-            margin-bottom: 22px;
-        }
+/* ===== Mock Remote ===== */
+.mock-remote {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  text-align: center;
+}
+.mock-id {
+  display: inline-block;
+  background: #EDEBE6;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin-bottom: 16px;
+}
+.mock-id-code {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #2C2C2A;
+}
+.mock-id-label {
+  font-size: 10px;
+  color: #B4B2A9;
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+.mock-remote-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.mock-btn-c,
+.mock-btn-o {
+  padding: 8px 24px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: default;
+}
+.mock-btn-c {
+  background: #2C2C2A;
+  color: #fff;
+}
+.mock-btn-o {
+  border: 0.5px solid #D3D1C7;
+  color: #5F5E5A;
+}
 
-        /* ========== 装饰分隔 ========== */
-        .divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 22px;
-            color: var(--pink-3);
-            font-size: 14px;
-        }
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            max-width: 80px;
-            background: linear-gradient(90deg, transparent, var(--pink-2), transparent);
-        }
+/* ===== Reverse Layout ===== */
+.product.reverse {
+  direction: rtl;
+}
+.product.reverse > * {
+  direction: ltr;
+}
+.product.reverse .product-info {
+  padding-right: 0;
+  padding-left: 20px;
+}
 
-        /* ========== 作者信息 ========== */
-        .author-info {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 26px;
-            flex-wrap: wrap;
-        }
-        .info-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--pink-1);
-            color: var(--pink-deep);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-        .info-pill .icon { font-size: 14px; }
+/* ===== Divider ===== */
+.divider {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.divider-line {
+  height: 0.5px;
+  background: #D3D1C7;
+  width: 100%;
+}
 
-        .desc {
-            font-size: 14px;
-            color: var(--text-dim);
-            line-height: 1.8;
-            margin-bottom: 30px;
-            max-width: 480px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+/* ===== Footer ===== */
+footer {
+  padding: 48px;
+  text-align: center;
+}
+footer p {
+  font-size: 12px;
+  color: #B4B2A9;
+  letter-spacing: 2px;
+  font-weight: 300;
+}
 
-        /* ========== 功能卡片 ========== */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 32px;
-        }
-        .feature-card {
-            background: linear-gradient(135deg, #FFFFFF, var(--pink-1));
-            border: 1.5px solid var(--pink-2);
-            border-radius: var(--radius-sm);
-            padding: 16px 8px 14px;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-        .feature-card:hover {
-            transform: translateY(-4px) rotate(-1deg);
-            border-color: var(--pink-3);
-            box-shadow: 0 8px 20px rgba(255, 143, 177, 0.25);
-        }
-        .feature-card .icon { font-size: 26px; margin-bottom: 6px; }
-        .feature-card .name {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--pink-deep);
-        }
+/* ===== Animations ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
+}
+.fade-in-d1 { animation-delay: 0.1s; }
+.fade-in-d2 { animation-delay: 0.2s; }
+.fade-in-d3 { animation-delay: 0.3s; }
+.fade-in-d4 { animation-delay: 0.4s; }
+.fade-in-d5 { animation-delay: 0.5s; }
 
-        /* ========== 版本说明 ========== */
-        .version-hint {
-            font-size: 12px;
-            color: var(--text-dim);
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .version-hint strong {
-            color: var(--pink-deep);
-            font-weight: 600;
-            background: var(--pink-1);
-            padding: 2px 8px;
-            border-radius: 10px;
-        }
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
 
-        /* ========== 双按钮：圆胖可爱 ========== */
-        .btn-group {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px 30px;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 700;
-            font-family: inherit;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            color: #fff;
-            min-width: 180px;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--pink-3), var(--pink-5));
-            box-shadow: 0 6px 18px rgba(233, 30, 99, 0.3);
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 10px 28px rgba(233, 30, 99, 0.45);
-        }
-        .btn-primary:active { transform: translateY(0) scale(0.98); }
+/* ===== Modal ===== */
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(44,44,42,0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.modal-mask.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal {
+  background: #F5F3F0;
+  border-radius: 20px;
+  padding: 40px 48px 32px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.modal-mask.show .modal { transform: scale(1); }
+.modal-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+.modal-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #2C2C2A;
+  margin-bottom: 8px;
+}
+.modal-msg {
+  font-size: 14px;
+  color: #888780;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+.modal-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.modal-btn {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+.modal-btn-confirm {
+  background: #2C2C2A;
+  color: #F5F3F0;
+}
+.modal-btn-confirm:hover {
+  background: #444441;
+  transform: translateY(-1px);
+}
+.modal-btn-cancel {
+  background: #fff;
+  color: #888780;
+  border: 0.5px solid #D3D1C7;
+}
+.modal-btn-cancel:hover {
+  border-color: #2C2C2A;
+  color: #2C2C2A;
+}
 
-        .btn-secondary {
-            background: #FFFFFF;
-            color: var(--pink-deep);
-            border: 2px solid var(--pink-3);
-        }
-        .btn-secondary:hover {
-            background: var(--pink-1);
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 20px rgba(255, 143, 177, 0.3);
-        }
-        .btn-secondary:active { transform: translateY(0) scale(0.98); }
+.progress-container {
+  margin-top: 16px;
+  display: none;
+}
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #EDEBE6;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #2C2C2A;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.progress-text {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #888780;
+  font-weight: 300;
+}
 
-        .btn .badge {
-            font-size: 10px;
-            background: #FFEB3B;
-            color: var(--pink-deep);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: 700;
-            margin-left: 2px;
-            animation: badgeWiggle 1.5s ease-in-out infinite;
-        }
-        @keyframes badgeWiggle {
-            0%, 100% { transform: rotate(-5deg) scale(1); }
-            50%      { transform: rotate(5deg) scale(1.1); }
-        }
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 20px 60px; }
+  .hero-title { font-size: 36px; }
+  .hero-sub { font-size: 14px; }
+  .section { padding: 60px 20px; }
+  .product {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .product.reverse {
+    direction: ltr;
+  }
+  .product.reverse .product-info {
+    padding-left: 0;
+  }
+  .product-info { padding-right: 0; }
+  .section-title { font-size: 28px; }
+  .product-name { font-size: 24px; }
+  .product-mock { padding: 20px; }
+  .btn, .btn-download, .btn-learn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-cta { flex-direction: column; }
+  .divider { padding: 0 20px; }
+  footer { padding: 32px 20px; }
+}
 
-        /* ========== 进度条 ========== */
-        .progress-container {
-            margin-top: 16px;
-            display: none;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: var(--pink-1);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--pink-3), var(--pink-5));
-            border-radius: 3px;
-            transition: width 0.3s ease;
-        }
-        .progress-text {
-            margin-top: 8px;
-            font-size: 13px;
-            color: var(--pink-deep);
-        }
+/* ===== Author Bar (prominent info) ===== */
+.author-bar {
+  text-align: center;
+  padding: 110px 48px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.author-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #2C2C2A;
+  color: #F5F3F0;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 20px rgba(44,44,42,0.15);
+}
+.author-pill .dot {
+  width: 8px;
+  height: 8px;
+  background: #5DCAA5;
+  border-radius: 50%;
+  display: inline-block;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+.author-pill .sep {
+  color: #888780;
+  margin: 0 4px;
+}
 
-        /* ========== 底部 ========== */
-        .footer {
-            margin-top: 24px;
-            font-size: 11px;
-            color: var(--pink-3);
-            letter-spacing: 2px;
-            font-weight: 500;
-        }
+/* ===== Sponsor Section ===== */
+.sponsor {
+  padding: 80px 48px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.sponsor-tag {
+  display: inline-block;
+  background: #F1EFE8;
+  color: #888780;
+  font-size: 12px;
+  letter-spacing: 3px;
+  padding: 4px 16px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+.sponsor-title {
+  font-size: 32px;
+  font-weight: 300;
+  color: #2C2C2A;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.sponsor-title em {
+  font-style: normal;
+  font-weight: 500;
+}
+.sponsor-desc {
+  font-size: 14px;
+  color: #888780;
+  font-weight: 300;
+  margin-bottom: 48px;
+}
+.sponsor-row {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.qr-card {
+  background: #fff;
+  border: 0.5px solid #D3D1C7;
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  width: 400px;
+  max-width: 100%;
+  transition: all 0.3s ease;
+}
+.qr-card:hover {
+  transform: translateY(-4px);
+  border-color: #2C2C2A;
+  box-shadow: 0 8px 24px rgba(44,44,42,0.08);
+}
+.qr-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.qr-card-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #2C2C2A;
+}
+.qr-card-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #fff;
+  font-weight: 500;
+}
+.qr-card-icon.wx { background: #1AAD19; }
+.qr-card-icon.ali { background: #1677FF; }
+.qr-img-wrap {
+  background: #F5F3F0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+.qr-img-wrap img {
+  display: block;
+  width: 280px;
+  height: 280px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+.qr-card-tip {
+  font-size: 12px;
+  color: #B4B2A9;
+  font-weight: 300;
+}
+.qr-card-tip strong {
+  font-weight: 500;
+  color: #5F5E5A;
+}
+@media (max-width: 768px) {
+  .author-bar { padding: 90px 16px 16px; }
+  .author-pill {
+    font-size: 12px;
+    padding: 10px 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sponsor { padding: 60px 20px 40px; }
+  .sponsor-title { font-size: 24px; }
+  .qr-card { width: 100%; max-width: 400px; padding: 20px; }
+  .qr-img-wrap { min-height: 240px; padding: 12px; }
+  .qr-img-wrap img { width: 220px; height: 220px; }
+}
 
-        /* ========== 自定义弹窗（替换浏览器 confirm）========== */
-        .modal-mask {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        .modal-mask.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .modal {
-            background: #FFFFFF;
-            border: 3px solid var(--pink-2);
-            border-radius: 24px;
-            padding: 32px 36px 24px;
-            text-align: center;
-            max-width: 380px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            transform: scale(0.7);
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .modal-mask.show .modal { transform: scale(1); }
-
-        .modal .modal-icon {
-            font-size: 56px;
-            margin-bottom: 12px;
-            display: inline-block;
-            animation: bounceIcon 1s ease-in-out infinite;
-        }
-        @keyframes bounceIcon {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50%      { transform: translateY(-8px) rotate(5deg); }
-        }
-        .modal .modal-title {
-            font-size: 19px;
-            font-weight: 700;
-            color: var(--pink-deep);
-            margin-bottom: 10px;
-        }
-        .modal .modal-msg {
-            font-size: 14px;
-            color: var(--text);
-            line-height: 1.7;
-            margin-bottom: 22px;
-        }
-        .modal-btns {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-        .modal-btn {
-            flex: 1;
-            padding: 11px 18px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: inherit;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        .modal-btn-confirm {
-            background: linear-gradient(135deg, var(--pink-3), var(--pink-5));
-            color: #fff;
-            border-color: transparent;
-        }
-        .modal-btn-confirm:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(233, 30, 99, 0.35);
-        }
-        .modal-btn-cancel {
-            background: #FFF;
-            color: var(--text-dim);
-            border-color: var(--pink-2);
-        }
-        .modal-btn-cancel:hover {
-            background: var(--pink-1);
-            color: var(--pink-deep);
-            border-color: var(--pink-3);
-        }
-
-        /* ========== 响应式 ========== */
-        @media (max-width: 600px) {
-            .container { padding: 30px 18px 24px; }
-            h1 { font-size: 26px; }
-            .features { grid-template-columns: repeat(2, 1fr); }
-            .btn { padding: 12px 18px; font-size: 13px; width: 100%; }
-            .btn-group { flex-direction: column; }
-            .author-info { flex-direction: column; gap: 8px; }
-        }
-    </style>
+/* ===== Music FAB ===== */
+.music-fab {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #2C2C2A;
+  color: #F5F3F0;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  box-shadow: 0 6px 20px rgba(44,44,42,0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.music-fab:hover {
+  transform: scale(1.08);
+  background: #444441;
+}
+.music-fab.playing svg {
+  animation: musicSpin 3s linear infinite;
+}
+.music-fab.hint::after {
+  content: '♪';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  background: #D85A30;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  animation: hintPulse 1.5s ease-in-out infinite;
+}
+@keyframes musicSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes hintPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+@media (max-width: 768px) {
+  .music-fab {
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+  }
+}
+</style>
 </head>
 <body>
 
-    <!-- 浮动装饰 -->
-    <div class="deco">
-        <span>🌸</span>
-        <span>🎀</span>
-        <span>💖</span>
-        <span>✨</span>
-        <span>🌷</span>
+<!-- Navigation -->
+<nav>
+  <div class="nav-brand">小阳宝宝</div>
+  <ul class="nav-links">
+    <li><a href="#remote">远程工具箱</a></li>
+    <li><a href="#downloader">下载器</a></li>
+  </ul>
+</nav>
+
+<!-- Author Info (prominent) -->
+<div class="author-bar fade-in">
+  <div class="author-pill">
+    <span class="dot"></span>
+    <span>✍️ 作者：小阳</span>
+    <span class="sep">·</span>
+    <span>QQ：2248653591</span>
+  </div>
+</div>
+
+<!-- BGM Audio -->
+<audio id="bgm" loop preload="auto" autoplay
+  src="file:///C:/Users/Administrator/Downloads/%E4%BD%A0%E4%BB%AC%E7%9A%84%E5%A5%BD%E6%9C%8B%E5%8F%8B%E5%A4%A7%E9%9B%A8%20-%20%E6%83%85%E7%BB%93_%5Bcut_125sec%5D.mp3">
+</audio>
+
+<!-- Music FAB -->
+<button class="music-fab hint" id="musicFab" aria-label="背景音乐">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 18V5l12-2v13"></path>
+    <circle cx="6" cy="18" r="3"></circle>
+    <circle cx="18" cy="16" r="3"></circle>
+  </svg>
+</button>
+<section class="section" id="remote">
+  <div class="section-header fade-in">
+    <p class="section-number">N° 001</p>
+    <h2 class="section-title">远程连接，<em>一键即达</em></h2>
+  </div>
+
+  <div class="product reverse">
+    <div class="product-visual fade-in fade-in-d2">
+      <div class="product-mock">
+        <div class="mock-badge">● 就绪</div>
+        <div class="mock-remote">
+          <div class="mock-id">
+            <div class="mock-id-code">523 841 679</div>
+            <div class="mock-id-label">你的设备代码</div>
+          </div>
+          <div style="margin-bottom:12px;">
+            <p style="font-size:13px; color:#888780; font-weight:300;">输入对方代码即可连接</p>
+          </div>
+          <div class="mock-remote-actions">
+            <span class="mock-btn-c">连接</span>
+            <span class="mock-btn-o">设置</span>
+          </div>
+        </div>
+        <div class="mock-features" style="margin-top:16px;">
+          <span class="mock-feat">一键运行</span>
+          <span class="mock-feat">自动安装</span>
+          <span class="mock-feat">多软件支持</span>
+          <span class="mock-feat">即开即用</span>
+        </div>
+      </div>
     </div>
-    <div class="halo"></div>
 
-    <!-- ========== 主内容 ========== -->
-    <div class="container">
-        <div class="logo">🧰</div>
+    <div class="product-info fade-in fade-in-d3">
+      <p class="product-tag">远程工具</p>
+      <h3 class="product-name">小阳远程工具箱</h3>
+      <p class="product-desc">
+        一款集成化的远程工具管理软件，支持<strong>一键下载并自动运行</strong>市面上的主流远程控制软件。无需繁琐的搜索和安装步骤，打开即用，快速建立远程连接。
+      </p>
+      <p class="product-desc" style="font-size:13px; color:#B4B2A9;">
+        集成主流远程软件 · 自动识别环境 · 绿色免安装
+      </p>
+      <div class="product-actions">
+        <a href="https://gitee.com/xiaoyang910477/shuajikai/releases/download/v5.2.0/%E5%B0%8F%E9%98%B3%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7%E7%AE%B1.exe"
+           class="btn-download"
+           onclick="return startDownload(this, '小阳远程工具箱')">下载远程工具箱</a>
+        <span class="btn-learn" style="display:inline-flex; cursor:default; opacity:0.6;">v1.0 · 7.2 MB</span>
+      </div>
+      <!-- 进度条 -->
+      <div class="progress-container" id="progressContainer2">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill2"></div></div>
+        <div class="progress-text" id="progressText2">准备开始下载...</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <h1>小阳工具箱</h1>
-        <div class="subtitle">XIAOYANG TOOLBOX</div>
+<div class="divider"><div class="divider-line"></div></div>
 
-        <div class="divider">✿ 高效 · 实用 · 便捷 ✿</div>
+<!-- Section: 小阳下载器 -->
+<section class="section" id="downloader">
+  <div class="section-header fade-in">
+    <p class="section-number">N° 002</p>
+    <h2 class="section-title">高速下载，<em>从未如此简单</em></h2>
+  </div>
 
-        <!-- 作者信息 -->
-        <div class="author-info">
-            <span class="info-pill"><span class="icon">✍️</span>作者：小阳</span>
-            <span class="info-pill"><span class="icon">💬</span>QQ：2248653591</span>
-            <span class="info-pill"><span class="icon">📦</span>v1.0.2</span>
-        </div>
-
-        <p class="desc">
-            一款高效、实用的多功能工具集合，为你的日常操作提供便捷支持。<br>
-            请根据需求选择下载版本～
-        </p>
-
-        <!-- 功能卡片 -->
-        <div class="features">
-            <div class="feature-card"><div class="icon">🚗</div><div class="name">驱动安装</div></div>
-            <div class="feature-card"><div class="icon">📱</div><div class="name">ADB 工具</div></div>
-            <div class="feature-card"><div class="icon">⚡</div><div class="name">Fastboot</div></div>
-            <div class="feature-card"><div class="icon">🛠️</div><div class="name">系统工具</div></div>
-            <div class="feature-card"><div class="icon">🔍</div><div class="name">设备检测</div></div>
-            <div class="feature-card"><div class="icon">🎀</div><div class="name">粉色主题</div></div>
-        </div>
-
-        <!-- 版本提示 -->
-        <div class="version-hint">
-            <strong>便捷版</strong> 单文件即下即用
-        </div>
-
-        <!-- 下载按钮 -->
-        <div class="btn-group">
-            <!-- 便捷版 -->
-            <a href="https://gitee.com/xiaoyang910477/shuajikai/releases/download/v5.2.0/%E5%B0%8F%E9%98%B3%E5%B7%A5%E5%85%B7%E7%AE%B1.exe"
-               class="btn btn-primary" target="_blank"
-               onclick="return startDownload(this, '便捷版')">
-                📥 小阳工具箱
-            </a>
-        </div>
-
-        <!-- 进度条 -->
-        <div class="progress-container" id="progressContainer">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+  <div class="product">
+    <div class="product-visual fade-in fade-in-d2">
+      <div class="product-mock">
+        <div class="mock-badge">● 下载中</div>
+        <div class="mock-downloader">
+          <div class="mock-item">
+            <div class="mock-file">
+              <div class="mock-icon">ZIP</div>
+              <div>
+                <div class="mock-fname">project-source.zip</div>
+                <div class="mock-fsize">256.8 MB</div>
+              </div>
             </div>
-            <div class="progress-text" id="progressText">🔄 准备开始下载...</div>
-        </div>
-
-        <div class="footer">— ♡ Made with love ♡ —</div>
-    </div>
-
-    <!-- ========== 自定义弹窗 ========== -->
-    <div class="modal-mask" id="modalMask">
-        <div class="modal">
-            <div class="modal-icon" id="modalIcon">🎉</div>
-            <div class="modal-title" id="modalTitle">下载已开始</div>
-            <div class="modal-msg" id="modalMsg">请查看浏览器下载栏完成下载</div>
-            <div class="modal-btns">
-                <button class="modal-btn modal-btn-cancel" id="modalCancel">取消</button>
-                <button class="modal-btn modal-btn-confirm" id="modalConfirm">确定</button>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="mock-progress"><div class="mock-fill" style="width:78%"></div></div>
+              <span class="mock-speed">78%</span>
             </div>
+          </div>
+          <div class="mock-item">
+            <div class="mock-file">
+              <div class="mock-icon">MP4</div>
+              <div>
+                <div class="mock-fname">tutorial-hd.mp4</div>
+                <div class="mock-fsize">1.2 GB</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="mock-progress"><div class="mock-fill" style="width:45%"></div></div>
+              <span class="mock-speed">45%</span>
+            </div>
+          </div>
+          <div class="mock-item">
+            <div class="mock-file">
+              <div class="mock-icon">ISO</div>
+              <div>
+                <div class="mock-fname">ubuntu-24.04-desktop.iso</div>
+                <div class="mock-fsize">4.8 GB</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="mock-progress"><div class="mock-fill" style="width:100%"></div></div>
+              <span class="mock-speed" style="color:#2C2C2A;">完成</span>
+            </div>
+          </div>
         </div>
+        <div class="mock-features" style="margin-top:16px;">
+          <span class="mock-feat">多线程加速</span>
+          <span class="mock-feat">断点续传</span>
+          <span class="mock-feat">批量下载</span>
+          <span class="mock-feat">智能管理</span>
+        </div>
+      </div>
     </div>
 
-    <script>
-        // ========== 自定义弹窗逻辑（替换 confirm）==========
-        const modal = {
-            mask: document.getElementById('modalMask'),
-            icon: document.getElementById('modalIcon'),
-            title: document.getElementById('modalTitle'),
-            msg: document.getElementById('modalMsg'),
-            confirmBtn: document.getElementById('modalConfirm'),
-            cancelBtn: document.getElementById('modalCancel'),
-            onConfirm: null,
+    <div class="product-info fade-in fade-in-d3">
+      <p class="product-tag">下载工具</p>
+      <h3 class="product-name">小阳下载器</h3>
+      <p class="product-desc">
+        一款高速稳定的下载管理工具。采用多线程加速引擎，支持<strong>断点续传</strong>、<strong>批量下载</strong>、<strong>任务队列管理</strong>等功能，全面接管浏览器下载，让大文件下载变得轻松高效。
+      </p>
+      <p class="product-desc" style="font-size:13px; color:#B4B2A9;">
+        支持 HTTP / HTTPS / FTP 协议 · 智能速度优化 · 任务分类管理
+      </p>
+      <div class="product-actions">
+        <a href="https://gitee.com/xiaoyang910477/shuajikai/releases/download/v5.2.0/%E5%B0%8F%E9%98%B3%E4%B8%8B%E8%BD%BD%E5%99%A8.exe"
+           class="btn-download"
+           onclick="return startDownload(this, '小阳下载器')">下载小阳下载器</a>
+        <span class="btn-learn" style="display:inline-flex; cursor:default; opacity:0.6;">v1.0 · 9.8 MB</span>
+      </div>
+      <!-- 进度条 -->
+      <div class="progress-container" id="progressContainer1">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill1"></div></div>
+        <div class="progress-text" id="progressText1">准备开始下载...</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            show(title, msg, icon, onConfirm) {
-                this.title.textContent = title;
-                this.msg.innerHTML = msg;
-                this.icon.textContent = icon || '🎉';
-                this.onConfirm = onConfirm;
-                this.mask.classList.add('show');
-            },
-            hide() {
-                this.mask.classList.remove('show');
-            }
-        };
-        modal.confirmBtn.addEventListener('click', () => {
-            const cb = modal.onConfirm;
-            modal.hide();
-            if (cb) cb(true);
-        });
-        modal.cancelBtn.addEventListener('click', () => modal.hide());
-        modal.mask.addEventListener('click', (e) => {
-            if (e.target === modal.mask) modal.hide();
-        });
+<div class="divider"><div class="divider-line"></div></div>
 
-        // ========== 下载处理 ==========
-        function startDownload(btn, version) {
-            modal.show(
-                `📥 ${version}小阳工具箱`,
-                `点击「确定」开始下载<br>请查看浏览器下载栏`,
-                '🎀',
-                () => doDownload(btn, version)
-            );
-            return false;  // 阻止默认跳转，等用户点确定
-        }
+<!-- Sponsor Section -->
+<section class="sponsor">
+  <span class="sponsor-tag">SPONSOR</span>
+  <h2 class="sponsor-title">友情<em>赞助</em></h2>
+  <p class="sponsor-desc">如果你觉得这两个小工具对你有帮助，欢迎扫码支持一下小阳～</p>
 
-        function doDownload(btn, version) {
-            // 显示进度条
-            const container = document.getElementById('progressContainer');
-            const fill = document.getElementById('progressFill');
-            const text = document.getElementById('progressText');
-            container.style.display = 'block';
+  <div class="sponsor-row">
+    <!-- 微信收款码 -->
+    <div class="qr-card fade-in">
+      <div class="qr-card-header">
+        <div class="qr-card-icon wx">微</div>
+        <span class="qr-card-name">微信支付</span>
+      </div>
+      <div class="qr-img-wrap">
+        <img src="file:///C:/Users/Administrator/Documents/xwechat_files/wxid_iy8sk2gmu9j722_cd3c/temp/RWTemp/2026-07/71d81466f074ec3fe42c16aae52d7a01/858a92759ec191e3e3342c035ca61d40.jpg" alt="微信收款码">
+      </div>
+      <p class="qr-card-tip">打开<strong>微信</strong>扫一扫</p>
+    </div>
 
-            // 真正开始下载
-            window.open(btn.href, '_blank');
+    <!-- 支付宝收款码 -->
+    <div class="qr-card fade-in">
+      <div class="qr-card-header">
+        <div class="qr-card-icon ali">支</div>
+        <span class="qr-card-name">支付宝</span>
+      </div>
+      <div class="qr-img-wrap">
+        <img src="file:///C:/Users/Administrator/Documents/xwechat_files/wxid_iy8sk2gmu9j722_cd3c/temp/RWTemp/2026-07/71d81466f074ec3fe42c16aae52d7a01/6503b304e1f61f12c2e56702553994bf.jpg" alt="支付宝收款码">
+      </div>
+      <p class="qr-card-tip">打开<strong>支付宝</strong>扫一扫</p>
+    </div>
+  </div>
+</section>
 
-            // 模拟进度
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 5;
-                if (progress > 100) progress = 100;
-                fill.style.width = progress + '%';
-                text.textContent = `📥 ${version} 下载进度：${progress}%`;
+<!-- Footer -->
+<footer>
+  <p>— 小阳宝宝 · 用心做好每个工具 —</p>
+</footer>
 
-                if (progress === 100) {
-                    clearInterval(interval);
-                    text.textContent = `✅ ${version} 下载完成！请在浏览器下载栏查看`;
-                    setTimeout(() => {
-                        container.style.display = 'none';
-                        fill.style.width = '0%';
-                    }, 4000);
-                }
-            }, 150);
-        }
-    </script>
+<!-- Modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal">
+    <div class="modal-icon" id="modalIcon">↓</div>
+    <div class="modal-title" id="modalTitle">准备下载</div>
+    <div class="modal-msg" id="modalMsg">点击确定开始下载</div>
+    <div class="modal-btns">
+      <button class="modal-btn modal-btn-cancel" id="modalCancel">取消</button>
+      <button class="modal-btn modal-btn-confirm" id="modalConfirm">确定</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Modal
+const modal = {
+  mask: document.getElementById('modalMask'),
+  icon: document.getElementById('modalIcon'),
+  title: document.getElementById('modalTitle'),
+  msg: document.getElementById('modalMsg'),
+  confirmBtn: document.getElementById('modalConfirm'),
+  cancelBtn: document.getElementById('modalCancel'),
+  onConfirm: null,
+  show(title, msg, icon, onConfirm) {
+    this.title.textContent = title;
+    this.msg.innerHTML = msg;
+    this.icon.textContent = icon || '↓';
+    this.onConfirm = onConfirm;
+    this.mask.classList.add('show');
+  },
+  hide() {
+    this.mask.classList.remove('show');
+  }
+};
+modal.confirmBtn.addEventListener('click', () => {
+  const cb = modal.onConfirm;
+  modal.hide();
+  if (cb) cb(true);
+});
+modal.cancelBtn.addEventListener('click', () => modal.hide());
+modal.mask.addEventListener('click', (e) => {
+  if (e.target === modal.mask) modal.hide();
+});
+
+// Download
+function startDownload(btn, name) {
+  const progressId = name === '小阳下载器' ? '1' : '2';
+  modal.show(
+    `↓ ${name}`,
+    `点击「确定」开始下载 ${name}`,
+    '↓',
+    () => doDownload(btn.href, name, progressId)
+  );
+  return false;
+}
+
+function doDownload(url, name, id) {
+  const container = document.getElementById('progressContainer' + id);
+  const fill = document.getElementById('progressFill' + id);
+  const text = document.getElementById('progressText' + id);
+  container.style.display = 'block';
+
+  window.open(url, '_blank');
+
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += 4;
+    if (progress > 100) progress = 100;
+    fill.style.width = progress + '%';
+    text.textContent = `${name} 下载中 ${progress}%`;
+
+    if (progress === 100) {
+      clearInterval(interval);
+      text.textContent = `${name} 已开始下载，请查看浏览器下载栏`;
+      setTimeout(() => {
+        container.style.display = 'none';
+        fill.style.width = '0%';
+        text.textContent = '准备开始下载...';
+      }, 5000);
+    }
+  }, 120);
+}
+// Music control - 纯自动播放
+(function() {
+  var bgm = document.getElementById('bgm');
+  var musicFab = document.getElementById('musicFab');
+  var isPlaying = false;
+
+  function updateUI() {
+    musicFab.classList.toggle('playing', isPlaying);
+    musicFab.classList.toggle('hint', !isPlaying);
+  }
+
+  function playMusic() {
+    if (isPlaying) return;
+    bgm.volume = 0.5;
+    bgm.play()
+      .then(function() { isPlaying = true; updateUI(); })
+      .catch(function() { isPlaying = false; updateUI(); });
+  }
+
+  function pauseMusic() {
+    bgm.pause();
+    isPlaying = false;
+    updateUI();
+  }
+
+  musicFab.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (isPlaying) pauseMusic();
+    else playMusic();
+  });
+
+  // HTML 层已设 autoplay，此处 JS 层再补枪
+  bgm.volume = 0.5;
+  bgm.play()
+    .then(function() { isPlaying = true; updateUI(); })
+    .catch(function() {
+      isPlaying = false;
+      updateUI();
+      // 延迟重试
+      var delays = [100, 300, 700, 1500];
+      delays.forEach(function(d) {
+        setTimeout(function() {
+          bgm.volume = 0.5;
+          bgm.play()
+            .then(function() { isPlaying = true; updateUI(); })
+            .catch(function() {});
+        }, d);
+      });
+      // 兜底：用户首次操作
+      var unlock = function() {
+        bgm.volume = 0.5;
+        bgm.play()
+          .then(function() { isPlaying = true; updateUI(); })
+          .catch(function() {});
+        document.removeEventListener('pointerdown', unlock);
+      };
+      document.addEventListener('pointerdown', unlock, { once: true });
+    });
+
+  window.addEventListener('load', function() {
+    if (isPlaying) return;
+    bgm.volume = 0.5;
+    bgm.play()
+      .then(function() { isPlaying = true; updateUI(); })
+      .catch(function() {});
+  });
+})();
+</script>
 </body>
 </html>
