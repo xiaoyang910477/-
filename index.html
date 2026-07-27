@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>小阳官网 | 小阳远程工具箱 &amp; 小阳下载器</title>
-<meta name="description" content="小阳官网 - 提供小阳远程工具箱和小阳下载器，一键远程连接工具免费下载，绿色免安装，即开即用。">
+<title>小阳官网 | 小阳远程工具箱 &amp; 小阳下载器 &amp; 天神录音机 &amp; 自动重装</title>
+<meta name="description" content="小阳官网 - 提供小阳远程工具箱、小阳下载器、天神录音机和自动重装工具，一键远程连接工具免费下载，绿色免安装，即开即用。">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -394,6 +394,129 @@ nav {
   gap: 8px;
   justify-content: center;
   margin-top: 16px;
+}
+
+/* ===== Mock Recorder ===== */
+.mock-recorder {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  text-align: center;
+}
+.mock-rec-wave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 64px;
+  margin-bottom: 20px;
+}
+.mock-rec-wave span {
+  width: 4px;
+  background: #2C2C2A;
+  border-radius: 2px;
+  animation: recWave 1.2s ease-in-out infinite;
+}
+@keyframes recWave {
+  0%, 100% { height: 10px; opacity: 0.4; }
+  50% { height: 44px; opacity: 1; }
+}
+.mock-rec-time {
+  font-size: 26px;
+  font-weight: 500;
+  color: #2C2C2A;
+  letter-spacing: 3px;
+  margin-bottom: 4px;
+}
+.mock-rec-label {
+  font-size: 11px;
+  color: #B4B2A9;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+.mock-rec-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.mock-rec-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #EDEBE6;
+  font-size: 14px;
+  color: #5F5E5A;
+  font-weight: 500;
+}
+.mock-rec-btn.active {
+  background: #2C2C2A;
+  color: #F5F3F0;
+}
+
+/* ===== Mock Reinstall ===== */
+.mock-reinstall {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  text-align: center;
+}
+.mock-rein-icon {
+  margin-bottom: 16px;
+}
+.mock-rein-status {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2C2C2A;
+  margin-bottom: 4px;
+}
+.mock-rein-label {
+  font-size: 11px;
+  color: #B4B2A9;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.mock-rein-progress {
+  width: 100%;
+  height: 6px;
+  background: #EDEBE6;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.mock-rein-fill {
+  height: 100%;
+  background: #2C2C2A;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.mock-rein-percent {
+  font-size: 12px;
+  color: #888780;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.mock-rein-steps {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.mock-rein-step {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: #EDEBE6;
+  color: #888780;
+  font-weight: 400;
+}
+.mock-rein-step.active {
+  background: #2C2C2A;
+  color: #F5F3F0;
 }
 .mock-btn-c,
 .mock-btn-o {
@@ -825,6 +948,8 @@ footer p {
   <ul class="nav-links">
     <li><a href="#remote">远程工具箱</a></li>
     <li><a href="#downloader">下载器</a></li>
+    <li><a href="#recorder">录音机</a></li>
+    <li><a href="#reinstall">自动重装</a></li>
   </ul>
 </nav>
 
@@ -838,12 +963,7 @@ footer p {
   </div>
 </div>
 
-<!-- Hero / SEO -->
-<section class="hero">
-  <p class="hero-label">— 小阳官网</p>
-  <h1 class="hero-title">小阳官网 — 远程工具 &amp; 下载器</h1>
-  <p class="hero-sub">小阳官网提供小阳远程工具箱和小阳下载器，一键远程连接，绿色免安装，欢迎下载使用。</p>
-</section>
+
 
 <!-- BGM Audio -->
 <audio id="bgm" loop preload="auto" autoplay
@@ -1003,11 +1123,147 @@ footer p {
 
 <div class="divider"><div class="divider-line"></div></div>
 
+<!-- Section: 天神录音机 -->
+<section class="section" id="recorder">
+  <div class="section-header fade-in">
+    <p class="section-number">N° 003</p>
+    <h2 class="section-title">电脑录音，<em>清晰纯净</em></h2>
+  </div>
+
+  <div class="product reverse">
+    <div class="product-visual fade-in fade-in-d2">
+      <div class="product-mock">
+        <div class="mock-badge">● 录音中</div>
+        <div class="mock-recorder">
+          <div class="mock-rec-wave">
+            <span style="animation-delay:0s"></span>
+            <span style="animation-delay:0.08s"></span>
+            <span style="animation-delay:0.16s"></span>
+            <span style="animation-delay:0.24s"></span>
+            <span style="animation-delay:0.32s"></span>
+            <span style="animation-delay:0.40s"></span>
+            <span style="animation-delay:0.48s"></span>
+            <span style="animation-delay:0.40s"></span>
+            <span style="animation-delay:0.32s"></span>
+            <span style="animation-delay:0.24s"></span>
+            <span style="animation-delay:0.16s"></span>
+            <span style="animation-delay:0.08s"></span>
+          </div>
+          <div class="mock-rec-time">00:03:24</div>
+          <div class="mock-rec-label">录音时长</div>
+          <div class="mock-rec-btns">
+            <span class="mock-rec-btn">‖</span>
+            <span class="mock-rec-btn active">●</span>
+            <span class="mock-rec-btn">■</span>
+          </div>
+        </div>
+        <div class="mock-features" style="margin-top:16px;">
+          <span class="mock-feat">高清录音</span>
+          <span class="mock-feat">降噪处理</span>
+          <span class="mock-feat">格式转换</span>
+          <span class="mock-feat">定时录音</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-info fade-in fade-in-d3">
+      <p class="product-tag">录音工具</p>
+      <h3 class="product-name">天神录音机</h3>
+      <p class="product-desc">
+        一款专业的电脑录音软件，支持<strong>系统声音</strong>和<strong>麦克风声音</strong>同时录制。内置智能降噪算法，自动过滤环境噪音，输出高清无损音频。操作简单，即开即录，适合会议记录、在线课程、语音创作等多种场景。
+      </p>
+      <p class="product-desc" style="font-size:13px; color:#B4B2A9;">
+        支持系统音频捕获 · 麦克风录音 · 多格式导出 · 绿色免安装
+      </p>
+      <div class="product-actions">
+        <a href="https://gitee.com/xiaoyang910477/shuajikai/releases/download/v5.2.0/%E5%A4%A9%E7%A5%9E%E5%BD%95%E9%9F%B3%E6%9C%BA.exe"
+           class="btn-download"
+           onclick="return startDownload(this, '天神录音机')">下载天神录音机</a>
+        <span class="btn-learn" style="display:inline-flex; cursor:default; opacity:0.6;">v1.0 · 6.5 MB</span>
+      </div>
+      <!-- 进度条 -->
+      <div class="progress-container" id="progressContainer3">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill3"></div></div>
+        <div class="progress-text" id="progressText3">准备开始下载...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- Section: 自动重装 -->
+<section class="section" id="reinstall">
+  <div class="section-header fade-in">
+    <p class="section-number">N° 004</p>
+    <h2 class="section-title">系统重装，<em>一键搞定</em></h2>
+  </div>
+
+  <div class="product">
+    <div class="product-visual fade-in fade-in-d2">
+      <div class="product-mock">
+        <div class="mock-badge">● 就绪</div>
+        <div class="mock-reinstall">
+          <div class="mock-rein-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2C2C2A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M12 8v4l3 3"></path>
+              <path d="M8.5 5.5 12 3l3.5 2.5"></path>
+            </svg>
+          </div>
+          <div class="mock-rein-status">Windows 11 专业版</div>
+          <div class="mock-rein-label">准备安装</div>
+          <div class="mock-rein-progress">
+            <div class="mock-rein-fill" style="width:0%"></div>
+          </div>
+          <div class="mock-rein-percent">0%</div>
+          <div class="mock-rein-steps">
+            <span class="mock-rein-step active">环境检测</span>
+            <span class="mock-rein-step">下载镜像</span>
+            <span class="mock-rein-step">系统安装</span>
+            <span class="mock-rein-step">配置完成</span>
+          </div>
+        </div>
+        <div class="mock-features" style="margin-top:16px;">
+          <span class="mock-feat">自动检测</span>
+          <span class="mock-feat">镜像下载</span>
+          <span class="mock-feat">一键重装</span>
+          <span class="mock-feat">驱动适配</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-info fade-in fade-in-d3">
+      <p class="product-tag">重装工具</p>
+      <h3 class="product-name">小阳自动重装</h3>
+      <p class="product-desc">
+        一款智能化的系统重装工具，支持<strong>自动检测</strong>当前硬件环境，智能匹配并下载合适的系统镜像。无需U盘、无需PE，一键即可完成系统重装，让小白用户也能轻松解决系统卡顿、蓝屏等疑难问题。
+      </p>
+      <p class="product-desc" style="font-size:13px; color:#B4B2A9;">
+        自动环境检测 · 智能镜像匹配 · 一键在线重装 · 驱动自动适配
+      </p>
+      <div class="product-actions">
+        <a href="https://gitee.com/xiaoyang910477/shuajikai/releases/download/v5.2.0/%E8%87%AA%E5%8A%A8%E9%87%8D%E8%A3%85.exe"
+           class="btn-download"
+           onclick="return startDownload(this, '小阳自动重装')">下载自动重装</a>
+        <span class="btn-learn" style="display:inline-flex; cursor:default; opacity:0.6;">v1.0 · 8.1 MB</span>
+      </div>
+      <!-- 进度条 -->
+      <div class="progress-container" id="progressContainer4">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill4"></div></div>
+        <div class="progress-text" id="progressText4">准备开始下载...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
 <!-- Sponsor Section -->
 <section class="sponsor">
   <span class="sponsor-tag">SPONSOR</span>
   <h2 class="sponsor-title">友情<em>赞助</em></h2>
-  <p class="sponsor-desc">如果你觉得这两个小工具对你有帮助，欢迎扫码支持一下小阳～</p>
+  <p class="sponsor-desc">如果你觉得这几个小工具对你有帮助，欢迎扫码支持一下小阳～</p>
 
   <div class="sponsor-row">
     <!-- 微信收款码 -->
@@ -1087,7 +1343,7 @@ modal.mask.addEventListener('click', (e) => {
 
 // Download
 function startDownload(btn, name) {
-  const progressId = name === '小阳下载器' ? '1' : '2';
+  const progressId = name === '小阳下载器' ? '1' : name === '天神录音机' ? '3' : name === '小阳自动重装' ? '4' : '2';
   modal.show(
     `↓ ${name}`,
     `点击「确定」开始下载 ${name}`,
