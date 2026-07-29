@@ -20,7 +20,7 @@ body {
 /* ===== Navigation ===== */
 nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 44px; left: 0; right: 0;
   padding: 24px 48px;
   display: flex;
   justify-content: space-between;
@@ -692,6 +692,36 @@ footer p {
   font-weight: 300;
 }
 
+/* ===== Top Banner ===== */
+.top-banner {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #C0392B, #E67E22);
+  z-index: 200;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+.top-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 6px 18px;
+  border-radius: 20px;
+  transition: background 0.25s, transform 0.15s;
+}
+.top-banner-link:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-1px);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   nav { padding: 16px 20px; }
@@ -941,6 +971,11 @@ footer p {
 </style>
 </head>
 <body>
+
+<!-- Top Banner: 小阳推荐聊天软件 -->
+<div class="top-banner">
+  <a class="top-banner-link" href="https://www.batchat.com/" target="_blank" rel="noopener noreferrer">小阳推荐聊天软件 →</a>
+</div>
 
 <!-- Navigation -->
 <nav>
